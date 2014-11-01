@@ -17,7 +17,7 @@ require "impact_radius_api/errors/error"
 require "impact_radius_api/errors/authentication_error"
 require "impact_radius_api/errors/argument_error"
 require "impact_radius_api/errors/not_implemented_error"
-#require "impact_radius_api/errors/invalid_request_error"
+require "impact_radius_api/errors/invalid_request_error"
 
 module ImpactRadiusAPI
   @api_base_uri = "api.impactradius.com"

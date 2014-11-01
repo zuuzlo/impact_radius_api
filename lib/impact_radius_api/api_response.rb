@@ -1,19 +1,27 @@
 module ImpactRadiusAPI
   class APIResponse
-    attr_reader :meta, :data, :request
+    attr_reader :data, :request, :page, :num_pages, :page_size
 
     def initialize(response, resource)
       @request = response.request
       result = response["ImpactRadiusResponse"]
-      require 'pry'; binding.pry
+      @page = result[resource]["page"].to_i
+      @num_pages = result[resource]["numpages"].to_i
+      @page_size = result[resource]["pagesize"]
       @data = parse(result[resource][resource[0..-2]])
     end
 
     def all
-      while meta.pagination.next
-        uri = Addressable::URI.parse(meta.pagination.next.href)
-        next_page_response = EBayEnterpriseAffiliateNetwork::Publisher.new.request(uri.origin + uri.path, uri.query_values)
-        @meta = next_page_response.meta
+      page = @page
+      num_pages = @num_pages
+      
+      while num_pages > page
+        uri = Addressable::URI.parse(request.uri)
+        class_name = uri.path.match(/^\/[a-z]+\//i)[0].gsub("/","")
+        params = uri.query_values
+        params.merge!({ 'Page' => "#{page.to_i + 1}" })
+        next_page_response =  ImpactRadiusAPI.const_get(class_name).new.request( uri.origin + uri.path, params )
+        page = next_page_response.page
         @data += next_page_response.data
       end
       @data

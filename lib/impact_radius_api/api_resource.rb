@@ -14,7 +14,7 @@ module ImpactRadiusAPI
     end
 
     def get(api_resource, params = {})
-      @resource ||= api_resource
+      @resource ||= self.xml_field(api_resource)
       unless auth_token ||= ImpactRadiusAPI.auth_token
         raise AuthenticationError.new(
           "No authentication token (AuthToken) provided. Set your API key using 'ImpactRadiusAPI.auth_token = <API-KEY>'. " +
@@ -47,12 +47,15 @@ module ImpactRadiusAPI
       raise ArgumentError, "Params must be a Hash; got #{params.class} instead" unless params.is_a? Hash
 
       #resource_url = ImpactRadiusAPI.api_base_url + base_path + api_resource
-      resource_url = "https://" + account_sid + ":"+ auth_token +"@" + ImpactRadiusAPI.api_base_uri + base_path + account_sid + "/" + api_resource
+      resource_url = "https://" + account_sid + ":" + auth_token +"@" + ImpactRadiusAPI.api_base_uri + base_path + account_sid + "/" + api_resource
       request(resource_url, params)
     end
 
-    def request(resource_url, params)
+    def request(resource_url, params = {})
       timeout = ImpactRadiusAPI.api_timeout
+
+      @resource ||= self.xml_field(resource_url.match(/\/[a-z]+(\?|\z)/i)[0].gsub("/","").gsub("?",""))
+      
       begin
         response = self.class.get(resource_url, query: params, timeout: timeout)
       rescue Timeout::Error
@@ -68,11 +71,11 @@ module ImpactRadiusAPI
       when 200, 201, 204
         APIResponse.new(response, @resource)
       when 400, 404
-        raise InvalidRequestError.new(response.message, response.code)
+        raise InvalidRequestError.new(response["ImpactRadiusResponse"]["Message"], response.code)
       when 401
-        raise AuthenticationError.new(response.message, response.code)
+        raise AuthenticationError.new(response["ImpactRadiusResponse"]["Message"], response.code)
       else
-        raise Error.new(response.message, response.code)
+        raise Error.new(response["ImpactRadiusResponse"]["Message"], response.code)
       end
     end
   end
