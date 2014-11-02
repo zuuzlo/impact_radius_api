@@ -48,7 +48,7 @@ ImpactRadiusAPI.auth_token = ENV["IR_AUTH_TOKEN"]  #can be in app/config/initial
 ImpactRadiusAPI.account_sid = ENV["IR_ACCOUNT_SID"] #can be in app/config/initializer/impact_radius_api.rb of RoR
 mediapartners = ImpactRadiusAPI::Mediapartners.new
 options = {
-  type: BANNER #for only banner ads default is both banner and text link.
+  type: "BANNER" #for only banner ads default is both banner and text link.
 }
 response = mediapartners.get("Ads", options)
 response.data.each do |ad|
@@ -57,6 +57,13 @@ response.data.each do |ad|
   puts "Link: #{ad.TrackingLink}"
 end
 ```
+If there are multiple pages, retrieve all the pages by using the ```all``` method:
+```ruby
+response.all.each do |ad|
+  # Do stuff
+end
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/impact_radius_api/fork )
