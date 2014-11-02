@@ -1,6 +1,8 @@
 # ImpactRadiusApi
 
-Ruby wrapper for [Impact Radius API](http://dev.impactradius.com/display/api/Home).  Only [Media Partner Resources](http://dev.impactradius.com/display/api/Media+Partner+Resources) is supported.
+Ruby wrapper for [Impact Radius API](http://dev.impactradius.com/display/api/Home).  Only [Media Partner Resources](http://dev.impactradius.com/display/api/Media+Partner+Resources) is curently supported.
+
+If you need services that are not yet supported, feel free to contribute. For questions or bugs please create an issue.
 
 ## Installation
 
@@ -18,7 +20,7 @@ Or install it yourself as:
 
     $ gem install impact_radius_api
 
-## Usage
+## Configuration
 This gem is designed to support [Media Partner Resources](http://dev.impactradius.com/display/api/Media+Partner+Resources).
 All requests to the Impact Radius REST API require you to use HTTP Basic Authentication to convey your identity.
 
@@ -31,9 +33,30 @@ require "impact_radius_api" # no need for RoR  :account_sid, :auth_token,
 ImpactRadiusAPI.auth_token = ENV["IR_AUTH_TOKEN"]
 ImpactRadiusAPI.account_sid = ENV["IR_ACCOUNT_SID"]
 ```
-
-TODO: Write usage instructions here
-
+##Configuration Example
+This applys to Ruby on Rails. Create ```app/config/initializer/impact_radius_api.rb``` and add the following:
+```ruby
+ImpactRadiusAPI.auth_token = ENV["IR_AUTH_TOKEN"]
+ImpactRadiusAPI.account_sid = ENV["IR_ACCOUNT_SID"]
+```
+##Usage
+###Media Partner Resources Ads
+Will return all Banner and Text Link ads. See Impact Radius API Documentation [Ads](http://dev.impactradius.com/display/api/Campaign+Ads)
+```ruby
+require "impact_radius_api" #not needed for RoR
+ImpactRadiusAPI.auth_token = ENV["IR_AUTH_TOKEN"]  #can be in app/config/initializer/impact_radius_api.rb of RoR
+ImpactRadiusAPI.account_sid = ENV["IR_ACCOUNT_SID"] #can be in app/config/initializer/impact_radius_api.rb of RoR
+mediapartners = ImpactRadiusAPI::Mediapartners.new
+options = {
+  type: BANNER #for only banner ads default is both banner and text link.
+}
+response = mediapartners.get("Ads", options)
+response.data.each do |ad|
+  puts "Name: #{ad.Name}"
+  puts "Description: #{ad.Description}"
+  puts "Link: #{ad.TrackingLink}"
+end
+```
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/impact_radius_api/fork )
