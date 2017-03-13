@@ -47,7 +47,7 @@ module ImpactRadiusAPI
       raise ArgumentError, "Params must be a Hash; got #{params.class} instead" unless params.is_a? Hash
 
       #resource_url = ImpactRadiusAPI.api_base_url + base_path + api_resource
-      resource_url = "https://" + account_sid + ":" + auth_token +"@" + ImpactRadiusAPI.api_base_uri + base_path + account_sid + "/" + api_resource
+      resource_url = "https://" + account_sid + ":" + auth_token +"@" + pre_uri +  ImpactRadiusAPI.api_base_uri + base_path + account_sid + "/" + api_resource
       request(resource_url, params)
     end
 
@@ -76,6 +76,14 @@ module ImpactRadiusAPI
         raise AuthenticationError.new(response["ImpactRadiusResponse"]["Message"], response.code)
       else
         raise Error.new(response["ImpactRadiusResponse"]["Message"], response.code)
+      end
+    end
+
+    def pre_uri
+      if %w(Ads PromotionalAds ActionInquiries Campaigns Acitons).include? @resource
+        ""
+      else
+        "product."
       end
     end
   end

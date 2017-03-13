@@ -1,4 +1,4 @@
-# coding: utf-8
+#coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'impact_radius_api/version'
@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = ImpactRadiusAPI::VERSION
   spec.authors       = ["Kirk Jarvis"]
   spec.email         = ["zuuzlo@yahoo.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Ruby wrapper for Impact Radius API}
+  spec.description   = %q{Ruby wrapper for Impact Radius API (http://dev.impactradius.com/display/api/Home).  Media Partner Resources (http://dev.impactradius.com/display/api/Media+Partner+Resources) and part of (http://dev.impactradius.com/display/api/Product+Data+System+Media+Partner+Resources) is curently supported.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -29,6 +29,4 @@ Gem::Specification.new do |spec|
   spec.add_dependency "httparty", "~> 0.13"
   spec.add_dependency "json", "~> 1.8", ">= 1.8.1"
   spec.add_dependency "recursive-open-struct", "~> 0.5", ">= 0.5.0"
-
-  
 end

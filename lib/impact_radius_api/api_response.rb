@@ -8,6 +8,7 @@ module ImpactRadiusAPI
       @page = result[resource]["page"].to_i
       @num_pages = result[resource]["numpages"].to_i
       @page_size = result[resource]["pagesize"]
+      require 'pry'; binding.pry
       @data = parse(result[resource][resource[0..-2]])
     end
 

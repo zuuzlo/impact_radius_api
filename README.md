@@ -63,6 +63,32 @@ response.all.each do |ad|
   # Do stuff
 end
 ```
+###Media Partner Resources Product
+Will return Products. See Impact Radius API Documentation [Products](http://dev.impactradius.com/display/api/Product+Data+System+Media+Partner+Resources)
+Catalogs and ItemSearch will only work right now. ItemSearch is only for Retail.
+```ruby
+require "impact_radius_api" #not needed for RoR
+ImpactRadiusAPI.auth_token = ENV["IR_AUTH_TOKEN"]  #can be in app/config/initializer/impact_radius_api.rb of RoR
+ImpactRadiusAPI.account_sid = ENV["IR_ACCOUNT_SID"] #can be in app/config/initializer/impact_radius_api.rb of RoR
+mediapartners = ImpactRadiusAPI::Mediapartners.new
+options = {
+  Query=Color:"Red"
+}
+response = mediapartners.get("Products/ItemSearch", options)
+response.data.each do |item|
+  puts "Name: #{item.Name}"
+  puts "Description: #{item.Description}"
+  puts "Link: #{item.TrackingLink}"
+end
+```
+
+If there are multiple pages, retrieve all the pages by using the ```all``` method:
+```ruby
+response.all.each do |item|
+  # Do stuff
+end
+```
+
 
 ## Contributing
 

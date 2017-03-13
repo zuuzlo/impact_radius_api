@@ -13,6 +13,12 @@ module ImpactRadiusAPI
         "Campaigns"
       when "Actions"
         "Actions"
+      when "Catalogs"
+        "Catalogs"
+      when "Items"
+        "Items"
+      when "Catalogs/ItemSearch"
+        "Items"  
       else
         raise InvalidRequestError.new("#{resource} is not a valid Media Partner Resources. Refer to: http://dev.impactradius.com/display/api/Media+Partner+Resources for valid Media Partner Resources.")
       end

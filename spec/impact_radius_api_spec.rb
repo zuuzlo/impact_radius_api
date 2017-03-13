@@ -177,7 +177,7 @@ describe "impact_radius_api" do
           XML
           stub_request(
             :get,
-            "https://api.impactradius.com/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Ads"
+              "https://IRkXujcbpSTF35691nPwrFCQsbVBwamUD1:CEdwLRxstFyC2qLAi58MiYe6sqVKD7Dm@api.impactradius.com/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Ads"
           ).
             to_return(
               status: 200,
@@ -214,7 +214,7 @@ describe "impact_radius_api" do
             XML
           stub_request(
             :get,
-            "https://api.impactradius.com/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Ads?PageSize=2"
+            "https://IRkXujcbpSTF35691nPwrFCQsbVBwamUD1:CEdwLRxstFyC2qLAi58MiYe6sqVKD7Dm@api.impactradius.com/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Ads?PageSize=2"
           ).
           to_return(
             status: 200,
@@ -314,7 +314,7 @@ describe "impact_radius_api" do
             XML
           stub_request(
             :get,
-            "https://api.impactradius.com/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/PromoAds?PageSize=2"
+            "https://IRkXujcbpSTF35691nPwrFCQsbVBwamUD1:CEdwLRxstFyC2qLAi58MiYe6sqVKD7Dm@api.impactradius.com/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/PromoAds?PageSize=2"
           ).
           to_return(
             status: 200,
@@ -402,8 +402,384 @@ describe "impact_radius_api" do
           expect(response.all.last.DiscountMinPurchaseAmount).to eq("125.00")
         end
       end
+
+      context "Products 200 responce" do
+        before do
+          xml_response = <<-XML
+            <?xml version="1.0" encoding="UTF-8"?>
+              <ImpactRadiusResponse>
+                <Items pagesize="100" uri="/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Catalogs/ItemSearch?Query=Color:red" firstpageuri="/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Catalogs/ItemSearch?PageSize=100&amp;Query=Color%3Ared" previouspageuri="" nextpageuri="/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Catalogs/ItemSearch?PageSize=100&amp;AfterId=g2wAAAABaANkACdkYmNvcmVAZGIzLmltcGFjdHJhZGl1czAwMi5jbG91ZGFudC5uZXRsAAAAAm4EAAAAAKBuBAD___-_amgCRkADn-8AAAAAYgAiv4Vq&amp;Query=Color%3Ared">
+                  <Item>
+                    <Id>product_530_21460447</Id>
+                    <CatalogId>530</CatalogId>
+                    <CampaignId>2092</CampaignId>
+                    <CampaignName>Target</CampaignName>
+                    <CatalogItemId>21460447</CatalogItemId>
+                    <Name>Allura 3/8 CT. T.W. Simulated Ruby Heart Pendant Necklace in Sterling Silver, Women's, Red</Name>
+                    <Description>Find Fine Jewelry Necklaces, Bracelets, Anklets at Target.com! Allura 3/8 CT. T.W. Simulated Ruby Heart Pendant Necklace in Sterling Silver Color: Red. Gender: Female. Age Group: Adult.</Description>
+                    <MultiPack/>
+                    <Bullets/>
+                    <Labels/>
+                    <Manufacturer>Allura</Manufacturer>
+                    <Url>http://goto.target.com/c/35691/78775/2092?aadid=21460447&amp;u=http%3A%2F%2Fwww.target.com%2Fp%2Fallura-3-8-ct-t-w-simulated-ruby-heart-pendant-necklace-in-sterling-silver%2F-%2FA-21460447</Url>
+                    <MobileUrl/>
+                    <ImageUrl>http://target.scene7.com/is/image/Target/21460447?wid=1000&amp;hei=1000</ImageUrl>
+                    <ProductBid/>
+                    <AdditionalImageUrls/>
+                    <CurrentPrice>29.99</CurrentPrice>
+                    <OriginalPrice>29.99</OriginalPrice>
+                    <Currency>USD</Currency>
+                    <StockAvailability>InStock</StockAvailability>
+                    <EstimatedShipDate/>
+                    <LaunchDate/>
+                    <ExpirationDate/>
+                    <Gtin>075000598628</Gtin>
+                    <GtinType/>
+                    <Asin/>
+                    <Mpn/>
+                    <ShippingRate>0.0</ShippingRate>
+                    <ShippingWeight>1.0</ShippingWeight>
+                    <ShippingWeightUnit>lb</ShippingWeightUnit>
+                    <ShippingLength>8.0</ShippingLength>
+                    <ShippingWidth>5.0</ShippingWidth>
+                    <ShippingHeight>2.0</ShippingHeight>
+                    <ShippingLengthUnit>in</ShippingLengthUnit>
+                    <ShippingLabel/>
+                    <Category/>
+                    <OriginalFormatCategory>Apparel &amp; Accessories &gt; Jewelry &gt; Necklaces</OriginalFormatCategory>
+                    <OriginalFormatCategoryId/>
+                    <ParentName/>
+                    <ParentSku/>
+                    <IsParent>false</IsParent>
+                    <Colors>
+                      <Color>Red</Color>
+                    </Colors>
+                    <Material/>
+                    <Pattern/>
+                    <Size/>
+                    <SizeUnit/>
+                    <Weight>1.0</Weight>
+                    <WeightUnit>lb</WeightUnit>
+                    <Condition>New</Condition>
+                    <AgeGroup>Adult</AgeGroup>
+                    <Gender>Female</Gender>
+                    <Adult>false</Adult>
+                    <Uri>/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Catalogs/530/Items/product_530_21460447</Uri>
+                  </Item>
+                  <Item>
+                    <Id>product_530_50320962</Id>
+                    <CatalogId>530</CatalogId>
+                    <CampaignId>2092</CampaignId>
+                    <CampaignName>Target</CampaignName>
+                    <CatalogItemId>50320962</CatalogItemId>
+                    <Name>6ct Burgundy Shiny Finial Drilled Christmas Ornament Set, Red</Name>
+                    <Description>Find Seasonal Holiday Decorations at Target.com! 8” Vickerman shiny finished finial ornament set of 6. These ornaments are a unique shape with a protective UV coating perfect for your decorating projects, whatever they may be. Color: Red.</Description>
+                    <MultiPack/>
+                    <Bullets/>
+                    <Labels/>
+                    <Manufacturer>Vickerman</Manufacturer>
+                    <Url>http://goto.target.com/c/35691/78775/2092?aadid=50320962&amp;u=http%3A%2F%2Fwww.target.com%2Fp%2F6ct-burgundy-shiny-finial-drilled-christmas-ornament-set%2F-%2FA-50320962</Url>
+                    <MobileUrl/>
+                    <ImageUrl>http://target.scene7.com/is/image/Target/50320962?wid=1000&amp;hei=1000</ImageUrl>
+                    <ProductBid/>
+                    <AdditionalImageUrls/>
+                    <CurrentPrice>40.74</CurrentPrice>
+                    <OriginalPrice>40.74</OriginalPrice>
+                    <Currency>USD</Currency>
+                    <StockAvailability>InStock</StockAvailability>
+                    <EstimatedShipDate/>
+                    <LaunchDate/>
+                    <ExpirationDate/>
+                    <Gtin>734205385821</Gtin>
+                    <GtinType/>
+                    <Asin/>
+                    <Mpn/>
+                    <ShippingRate>0.0</ShippingRate>
+                    <ShippingWeight>6.0</ShippingWeight>
+                    <ShippingWeightUnit>lb</ShippingWeightUnit>
+                    <ShippingLength>13.0</ShippingLength>
+                    <ShippingWidth>9.0</ShippingWidth>
+                    <ShippingHeight>9.0</ShippingHeight>
+                    <ShippingLengthUnit>in</ShippingLengthUnit>
+                    <ShippingLabel/>
+                    <Category/>
+                    <OriginalFormatCategory>Home &amp; Garden &gt; Decor &gt; Seasonal &amp; Holiday Decorations &gt; Holiday Ornaments</OriginalFormatCategory>
+                    <OriginalFormatCategoryId/>
+                    <ParentName/>
+                    <ParentSku/>
+                    <IsParent>false</IsParent>
+                    <Colors>
+                      <Color>Red</Color>
+                    </Colors>
+                    <Material/>
+                    <Pattern/>
+                    <Size/>
+                    <SizeUnit/>
+                    <Weight>6.0</Weight>
+                    <WeightUnit>lb</WeightUnit>
+                    <Condition>New</Condition>
+                    <AgeGroup/>
+                    <Gender/>
+                    <Adult>false</Adult>
+                    <Uri>/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Catalogs/530/Items/product_530_50320962</Uri>
+                  </Item>
+                  <Item>
+                    <Id>product_530_50302458</Id>
+                    <CatalogId>530</CatalogId>
+                    <CampaignId>2092</CampaignId>
+                    <CampaignName>Target</CampaignName>
+                    <CatalogItemId>50302458</CatalogItemId>
+                    <Name>Scholastic Trait Crate, Kindergarten, Six Books, Learning Guide, CD, More, Red</Name>
+                    <Description>Find Educational Kits and Learning Tools at Target.com! Scholastic Trait Crate, Kindergarten, Six Books, Learning Guide, CD, More Color: Red.</Description>
+                    <MultiPack/>
+                    <Bullets/>
+                    <Labels/>
+                    <Manufacturer>Scholastic</Manufacturer>
+                    <Url>http://goto.target.com/c/35691/78775/2092?aadid=50302458&amp;u=http%3A%2F%2Fwww.target.com%2Fp%2Fscholastic-trait-crate-kindergarten-six-books-learning-guide-cd-more%2F-%2FA-50302458</Url>
+                    <MobileUrl/>
+                    <ImageUrl>http://target.scene7.com/is/image/Target/50302458?wid=1000&amp;hei=1000</ImageUrl>
+                    <ProductBid/>
+                    <AdditionalImageUrls/>
+                    <CurrentPrice>114.99</CurrentPrice>
+                    <OriginalPrice>114.99</OriginalPrice>
+                    <Currency>USD</Currency>
+                    <StockAvailability>InStock</StockAvailability>
+                    <EstimatedShipDate/>
+                    <LaunchDate/>
+                    <ExpirationDate/>
+                    <Gtin>078073074709</Gtin>
+                    <GtinType/>
+                    <Asin/>
+                    <Mpn/>
+                    <ShippingRate>0.0</ShippingRate>
+                    <ShippingWeight>2.6</ShippingWeight>
+                    <ShippingWeightUnit>lb</ShippingWeightUnit>
+                    <ShippingLength>9.75</ShippingLength>
+                    <ShippingWidth>13.5</ShippingWidth>
+                    <ShippingHeight>5.25</ShippingHeight>
+                    <ShippingLengthUnit>in</ShippingLengthUnit>
+                    <ShippingLabel/>
+                    <Category/>
+                    <OriginalFormatCategory>Media &gt; Books</OriginalFormatCategory>
+                    <OriginalFormatCategoryId/>
+                    <ParentName/>
+                    <ParentSku/>
+                    <IsParent>false</IsParent>
+                    <Colors>
+                      <Color>Red</Color>
+                    </Colors>
+                    <Material/>
+                    <Pattern/>
+                    <Size/>
+                    <SizeUnit/>
+                    <Weight>2.6</Weight>
+                    <WeightUnit>lb</WeightUnit>
+                    <Condition>New</Condition>
+                    <AgeGroup/>
+                    <Gender/>
+                    <Adult>false</Adult>
+                    <Uri>/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Catalogs/530/Items/product_530_50302458</Uri>
+                  </Item>
+                  <Item>
+                    <Id>product_530_50304525</Id>
+                    <CatalogId>530</CatalogId>
+                    <CampaignId>2092</CampaignId>
+                    <CampaignName>Target</CampaignName>
+                    <CatalogItemId>50304525</CatalogItemId>
+                    <Name>4ct Burgundy Assorted Finishes Christmas Ornament Set, Red</Name>
+                    <Description>Find Seasonal Holiday Decorations at Target.com! 10” assorted finish Vickerman shatterproof ornaments come with 1 matte, 1 shiny, 1 glitter, and 1 sequin totaling 4 pieces. Shatterproof ornaments give you the look of real glass with the safety and reliability of plastic. These small ornaments are the perfect size for your decorating projects, whatever they may be. Color: Red.</Description>
+                    <MultiPack/>
+                    <Bullets/>
+                    <Labels/>
+                    <Manufacturer>Vickerman</Manufacturer>
+                    <Url>http://goto.target.com/c/35691/78775/2092?aadid=50304525&amp;u=http%3A%2F%2Fwww.target.com%2Fp%2F4ct-burgundy-assorted-finishes-christmas-ornament-set%2F-%2FA-50304525</Url>
+                    <MobileUrl/>
+                    <ImageUrl>http://target.scene7.com/is/image/Target/50304525?wid=1000&amp;hei=1000</ImageUrl>
+                    <ProductBid/>
+                    <AdditionalImageUrls/>
+                    <CurrentPrice>80.94</CurrentPrice>
+                    <OriginalPrice>80.94</OriginalPrice>
+                    <Currency>USD</Currency>
+                    <StockAvailability>InStock</StockAvailability>
+                    <EstimatedShipDate/>
+                    <LaunchDate/>
+                    <ExpirationDate/>
+                    <Gtin>734205352731</Gtin>
+                    <GtinType/>
+                    <Asin/>
+                    <Mpn/>
+                    <ShippingRate>0.0</ShippingRate>
+                    <ShippingWeight>5.0</ShippingWeight>
+                    <ShippingWeightUnit>lb</ShippingWeightUnit>
+                    <ShippingLength>21.0</ShippingLength>
+                    <ShippingWidth>21.0</ShippingWidth>
+                    <ShippingHeight>11.0</ShippingHeight>
+                    <ShippingLengthUnit>in</ShippingLengthUnit>
+                    <ShippingLabel/>
+                    <Category/>
+                    <OriginalFormatCategory>Home &amp; Garden &gt; Decor &gt; Seasonal &amp; Holiday Decorations &gt; Holiday Ornaments</OriginalFormatCategory>
+                    <OriginalFormatCategoryId/>
+                    <ParentName/>
+                    <ParentSku/>
+                    <IsParent>false</IsParent>
+                    <Colors>
+                      <Color>Red</Color>
+                    </Colors>
+                    <Material/>
+                    <Pattern/>
+                    <Size/>
+                    <SizeUnit/>
+                    <Weight>5.0</Weight>
+                    <WeightUnit>lb</WeightUnit>
+                    <Condition>New</Condition>
+                    <AgeGroup/>
+                    <Gender/>
+                    <Adult>false</Adult>
+                    <Uri>/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Catalogs/530/Items/product_530_50304525</Uri>
+                  </Item>
+                  <Item>
+                    <Id>product_530_16620059</Id>
+                    <CatalogId>530</CatalogId>
+                    <CampaignId>2092</CampaignId>
+                    <CampaignName>Target</CampaignName>
+                    <CatalogItemId>16620059</CatalogItemId>
+                    <Name>Pantone Expressions 5501R Runner - Warm (2'7X10'), Red</Name>
+                    <Description>Find Rugs, Mats and Grips at Target.com! Energetic mid-century abstract expressionists splashed paint onto canvas in surprising ways. A few decades later, those splashes convey genuine feeling with a powerful color message. Expressions by Oriental Weavers for Pantone Universe is a new cross-woven rug collection with the energy and style of those mid-century artists. Cutting-edge creative technologies create a striking interplay of texture and painterly color in contemporary patterns. The colors used are:16-1359 Orange Peel18-2133 Pink Flamb'e18-1761 Ski Patrol13-0752 Lemon Size: 2'7X10' Runner. Color: Red. Gender: Unisex.</Description>
+                    <MultiPack/>
+                    <Bullets/>
+                    <Labels/>
+                    <Manufacturer>Pantone Universe</Manufacturer>
+                    <Url>http://goto.target.com/c/35691/78775/2092?aadid=16620059&amp;u=http%3A%2F%2Fwww.target.com%2Fp%2Fpantone-expressions-5501r-runner-warm-2-7-x10%2F-%2FA-16620059</Url>
+                    <MobileUrl/>
+                    <ImageUrl>http://target.scene7.com/is/image/Target/16620059?wid=1000&amp;hei=1000</ImageUrl>
+                    <ProductBid/>
+                    <AdditionalImageUrls/>
+                    <CurrentPrice>199.0</CurrentPrice>
+                    <OriginalPrice>199.0</OriginalPrice>
+                    <Currency>USD</Currency>
+                    <StockAvailability>InStock</StockAvailability>
+                    <EstimatedShipDate/>
+                    <LaunchDate/>
+                    <ExpirationDate/>
+                    <Gtin>748679378463</Gtin>
+                    <GtinType/>
+                    <Asin/>
+                    <Mpn/>
+                    <ShippingRate>0.0</ShippingRate>
+                    <ShippingWeight>11.0</ShippingWeight>
+                    <ShippingWeightUnit>lb</ShippingWeightUnit>
+                    <ShippingLength>31.0</ShippingLength>
+                    <ShippingWidth>9.0</ShippingWidth>
+                    <ShippingHeight>9.0</ShippingHeight>
+                    <ShippingLengthUnit>in</ShippingLengthUnit>
+                    <ShippingLabel/>
+                    <Category/>
+                    <OriginalFormatCategory>Home &amp; Garden &gt; Decor &gt; Rugs</OriginalFormatCategory>
+                    <OriginalFormatCategoryId/>
+                    <ParentName/>
+                    <ParentSku/>
+                    <IsParent>false</IsParent>
+                    <Colors>
+                      <Color>Red</Color>
+                    </Colors>
+                    <Material/>
+                    <Pattern/>
+                    <Size>2'7X10' Runner</Size>
+                    <SizeUnit/>
+                    <Weight>11.0</Weight>
+                    <WeightUnit>lb</WeightUnit>
+                    <Condition>New</Condition>
+                    <AgeGroup/>
+                    <Gender>Unisex</Gender>
+                    <Adult>false</Adult>
+                    <Uri>/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Catalogs/530/Items/product_530_16620059</Uri>
+                  </Item>
+                  <Item>
+                    <Id>product_530_14771096</Id>
+                    <CatalogId>530</CatalogId>
+                    <CampaignId>2092</CampaignId>
+                    <CampaignName>Target</CampaignName>
+                    <CatalogItemId>14771096</CatalogItemId>
+                    <Name>Rubbermaid 4 Pc. Premium Cansister Set, Red</Name>
+                    <Description>Find Household Food or Beverage Storage Containers at Target.com! Rubbermaid 4 Pc. Premium Cansister Set Color: Red. Pattern: Solid.</Description>
+                    <MultiPack/>
+                    <Bullets/>
+                    <Labels/>
+                    <Manufacturer>Rubbermaid</Manufacturer>
+                    <Url>http://goto.target.com/c/35691/78775/2092?aadid=14771096&amp;u=http%3A%2F%2Fwww.target.com%2Fp%2Frubbermaid-4-pc-premium-cansister-set%2F-%2FA-14771096</Url>
+                    <MobileUrl/>
+                    <ImageUrl>http://target.scene7.com/is/image/Target/14771096?wid=1000&amp;hei=1000</ImageUrl>
+                    <ProductBid/>
+                    <AdditionalImageUrls/>
+                    <CurrentPrice>35.99</CurrentPrice>
+                    <OriginalPrice>35.99</OriginalPrice>
+                    <Currency>USD</Currency>
+                    <StockAvailability>InStock</StockAvailability>
+                    <EstimatedShipDate/>
+                    <LaunchDate/>
+                    <ExpirationDate/>
+                    <Gtin>71691466499</Gtin>
+                    <GtinType/>
+                    <Asin/>
+                    <Mpn/>
+                    <ShippingRate>0.0</ShippingRate>
+                    <ShippingWeight>4.63</ShippingWeight>
+                    <ShippingWeightUnit>lb</ShippingWeightUnit>
+                    <ShippingLength>9.75</ShippingLength>
+                    <ShippingWidth>10.125</ShippingWidth>
+                    <ShippingHeight>11.125</ShippingHeight>
+                    <ShippingLengthUnit>in</ShippingLengthUnit>
+                    <ShippingLabel/>
+                    <Category/>
+                    <OriginalFormatCategory>Home &amp; Garden &gt; Kitchen &amp; Dining &gt; Food Storage &gt; Food Storage Containers</OriginalFormatCategory>
+                    <OriginalFormatCategoryId/>
+                    <ParentName/>
+                    <ParentSku/>
+                    <IsParent>false</IsParent>
+                    <Colors>
+                      <Color>Red</Color>
+                    </Colors>
+                    <Material/>
+                    <Pattern>Solid</Pattern>
+                    <Size/>
+                    <SizeUnit/>
+                    <Weight>4.63</Weight>
+                    <WeightUnit>lb</WeightUnit>
+                    <Condition>New</Condition>
+                    <AgeGroup/>
+                    <Gender/>
+                    <Adult>false</Adult>
+                    <Uri>/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Catalogs/530/Items/product_530_14771096</Uri>
+                  </Item>
+                </Items>
+              </ImpactRadiusResponse>
+            XML
+
+          stub_request(
+            :get,
+            "https://IRkXujcbpSTF35691nPwrFCQsbVBwamUD1:CEdwLRxstFyC2qLAi58MiYe6sqVKD7Dm@product.api.impactradius.com/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Catalogs/ItemSearch?Query=Color:red"
+          ).
+          to_return(
+            status: 200,
+            body: xml_response,
+            headers: { "Content-type" => "text/xml; charset=UTF-8" }
+          )
+
+
+          ImpactRadiusAPI.auth_token = "CEdwLRxstFyC2qLAi58MiYe6sqVKD7Dm"
+          ImpactRadiusAPI.account_sid = "IRkXujcbpSTF35691nPwrFCQsbVBwamUD1"
+        end
+
+        let(:mediapartners) {ImpactRadiusAPI::Mediapartners.new}
+        let(:params)  {{ "Query" => "Color:red" }}
+        let(:response) {mediapartners.get("Catalogs/ItemSearch", params)}
+
+        it "first item is correct" do
+          expect(response.all.first.Id).to eq("product_530_21460447")
+        end
+      end
       
-      context "404 responce" do
+      context "404 response" do
         before do
           xml_response = <<-XML
             <?xml version="1.0" encoding="UTF-8"?>
@@ -411,7 +787,7 @@ describe "impact_radius_api" do
           XML
           stub_request(
             :get,
-            "https://api.impactradius.com/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Ads"
+            "https://IRkXujcbpSTF35691nPwrFCQsbVBwamUD1:CEdwLRxstFyC2qLAi58MiYe6sqVKD7Dm@api.impactradius.com/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Ads"
           ).
             to_return(
               status: 404,
@@ -445,6 +821,12 @@ describe "impact_radius_api" do
         it "returns PromotionalAds for resource PromoAds" do
           mediapartners = ImpactRadiusAPI::Mediapartners.new
           expect(mediapartners.xml_field("PromoAds")).to eq("PromotionalAds")
+        end
+      end
+      context "add valid resource" do
+        it "returns Catalogs/ItemSearch for ItemSearch" do
+          mediapartners = ImpactRadiusAPI::Mediapartners.new
+          expect(mediapartners.xml_field("Catalogs/ItemSearch")).to eq("Items")
         end
       end
     end
