@@ -67,13 +67,14 @@ module ImpactRadiusAPI
     private
 
     def process(response)
+
       case response.code
       when 200, 201, 204
         APIResponse.new(response, @resource)
       when 400, 404
         raise InvalidRequestError.new(response["ImpactRadiusResponse"]["Message"], response.code)
       when 401
-        raise AuthenticationError.new(response["ImpactRadiusResponse"]["Message"], response.code)
+        raise AuthenticationError.new(response.body, response.code)
       else
         raise Error.new(response["ImpactRadiusResponse"]["Message"], response.code)
       end
