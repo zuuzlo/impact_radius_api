@@ -20,6 +20,7 @@ module ImpactRadiusAPI
         class_name = uri.path.match(/^\/[a-z]+\//i)[0].gsub("/","")
         params = uri.query_values
         params.merge!({ 'Page' => "#{page.to_i + 1}" })
+        require 'pry'; binding.pry
         next_page_response =  ImpactRadiusAPI.const_get(class_name).new.request( uri.origin + uri.path, params )
         page = next_page_response.page
         @data += next_page_response.data
