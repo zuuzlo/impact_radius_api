@@ -19,7 +19,7 @@ module ImpactRadiusAPI
         "Items"
       when "Catalogs/ItemSearch"
         "Items"
-      when /Catalogs\/\d{4}\/Items/
+      when /Catalogs\/\d{3,5}\/Items/
         "Items"
       else
         raise InvalidRequestError.new("#{resource} is not a valid Media Partner Resources. Refer to: http://dev.impactradius.com/display/api/Media+Partner+Resources for valid Media Partner Resources.")
