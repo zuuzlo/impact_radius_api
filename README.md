@@ -74,13 +74,31 @@ mediapartners = ImpactRadiusAPI::Mediapartners.new
 options = {
   Query=Color:"Red"
 }
-response = mediapartners.get("Products/ItemSearch", options)
+response = mediapartners.get("Catalogs/ItemSearch", options)
 response.data.each do |item|
   puts "Name: #{item.Name}"
   puts "Description: #{item.Description}"
   puts "Link: #{item.TrackingLink}"
 end
 ```
+###Media Partner List Catalog Items
+Retrieves a list of specific catalog items using the catalog number.
+```ruby
+require "impact_radius_api" #not needed for RoR
+ImpactRadiusAPI.auth_token = ENV["IR_AUTH_TOKEN"]  #can be in app/config/initializer/impact_radius_api.rb of RoR
+ImpactRadiusAPI.account_sid = ENV["IR_ACCOUNT_SID"] #can be in app/config/initializer/impact_radius_api.rb of RoR
+mediapartners = ImpactRadiusAPI::Mediapartners.new
+options = {
+  Query=Color:"Red"
+}
+response = mediapartners.get("Catalogs/{CatalogID}/Items", options)
+response.data.each do |item|
+  puts "Name: #{item.Name}"
+  puts "Description: #{item.Description}"
+  puts "Link: #{item.TrackingLink}"
+end
+```
+CatalogId Intger required Id for specific Catalog.  Example 2255
 
 If there are multiple pages, retrieve all the pages by using the ```all``` method:
 ```ruby

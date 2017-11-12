@@ -31,7 +31,7 @@ describe "impact_radius_api" do
       end
     end
 
-    describe".base_path" do  
+    describe".base_path" do
       it "should return error if APIResource" do
         resource = ImpactRadiusAPI::APIResource.new
         expect{resource.base_path}.to raise_error(ImpactRadiusAPI::NotImplementedError)
@@ -239,8 +239,8 @@ describe "impact_radius_api" do
             XML
           stub_request(
             :get,
-            "https://api.impactradius.com/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Ads?PageSize=2&Page=2"
-          ).
+            "https://IRkXujcbpSTF35691nPwrFCQsbVBwamUD1:CEdwLRxstFyC2qLAi58MiYe6sqVKD7Dm@api.impactradius.com/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Ads?Page=2&PageSize=2").
+          with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
           to_return(
             status: 200,
             body: xml_response2,
@@ -263,8 +263,8 @@ describe "impact_radius_api" do
             XML
           stub_request(
             :get,
-            "https://api.impactradius.com/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Ads?PageSize=2&Page=3"
-          ).
+            "https://IRkXujcbpSTF35691nPwrFCQsbVBwamUD1:CEdwLRxstFyC2qLAi58MiYe6sqVKD7Dm@api.impactradius.com/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/Ads?Page=3&PageSize=2").
+          with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
           to_return(
             status: 200,
             body: xml_response3,
@@ -346,8 +346,8 @@ describe "impact_radius_api" do
             XML
           stub_request(
             :get,
-            "https://api.impactradius.com/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/PromoAds?Page=2&PageSize=2"
-          ).
+             "https://IRkXujcbpSTF35691nPwrFCQsbVBwamUD1:CEdwLRxstFyC2qLAi58MiYe6sqVKD7Dm@api.impactradius.com/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/PromoAds?Page=2&PageSize=2").
+          with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
           to_return(
             status: 200,
             body: xml_response2,
@@ -379,8 +379,8 @@ describe "impact_radius_api" do
             XML
           stub_request(
             :get,
-            "https://api.impactradius.com/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/PromoAds?Page=3&PageSize=2"
-          ).
+             "https://IRkXujcbpSTF35691nPwrFCQsbVBwamUD1:CEdwLRxstFyC2qLAi58MiYe6sqVKD7Dm@api.impactradius.com/Mediapartners/IRkXujcbpSTF35691nPwrFCQsbVBwamUD1/PromoAds?Page=3&PageSize=2").
+          with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
           to_return(
             status: 200,
             body: xml_response3,
@@ -827,6 +827,12 @@ describe "impact_radius_api" do
         it "returns Catalogs/ItemSearch for ItemSearch" do
           mediapartners = ImpactRadiusAPI::Mediapartners.new
           expect(mediapartners.xml_field("Catalogs/ItemSearch")).to eq("Items")
+        end
+      end
+      context "Items for list catalog items" do
+        it "returns Items for List Catalogs Items" do
+          mediapartners = ImpactRadiusAPI::Mediapartners.new
+          expect(mediapartners.xml_field("Catalogs/4525/Items")).to eq("Items")
         end
       end
     end
